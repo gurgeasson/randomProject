@@ -11,3 +11,4 @@ write some words on the reason I started this project, the research I did, docum
 
 list of resouces:
 raspi security tips: https://raspberrytips.com/security-tips-raspberry-pi/
+set up git: https://projects.raspberrypi.org/en/projects/getting-started-with-git/
