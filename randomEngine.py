@@ -1,5 +1,10 @@
 # print('hello world')
 
+# load time module for sleep
+try:
+    import time
+except RuntimeError:
+    print("Error importing RPi.GPIO! This is probably because you need superuser privileges. Maybe try 'sudo'")
 # load RPi.GPIO module. I need it to have access to the GPIO pins.
 try:
     import RPi.GPIO as GPIO
@@ -15,6 +20,7 @@ GPIO.setup(gpio_pin_7, GPIO.IN)
 
 while True:
     print('looping')
+    time.sleep(3)
 
 
 
