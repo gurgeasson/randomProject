@@ -13,7 +13,8 @@ list of resouces:
 raspi security tips: https://raspberrytips.com/security-tips-raspberry-pi/</br>
 set up git: https://projects.raspberrypi.org/en/projects/getting-started-with-git/</br>
 raspi pinout: https://pinout.xyz/pinout/pin7_gpio4</br>
-raspi gpio: https://www.makeuseof.com/tag/raspberry-pi-gpio-pins-guide/
+raspi gpio: https://www.makeuseof.com/tag/raspberry-pi-gpio-pins-guide/</br>
+https://sourceforge.net/p/raspberry-gpio-python/wiki/browse_pages/</br>
 
 ha a geiger counter 5v-ot ad, akkot nem szabad hasznalnom a normal gpio pin-eket
 

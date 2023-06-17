@@ -11,16 +11,16 @@ try:
 except RuntimeError:
     print("Error importing RPi.GPIO! This is probably because you need superuser privileges. Maybe try 'sudo'")
 
-GPIO.setmode(GPIO.BOARD) # I want to address the pins by the board number and not by the chip pin number.
+GPIO.setmode(GPIO.BCM) # I want to address the pins by the board number and not by the chip pin number.
 # print(GPIO.getmode())
-gpio_pin_7=7 # give a nive name to the GPIO pin the signal is attached to
-GPIO.setup(gpio_pin_7, GPIO.IN) # set pin to accept input from radiation counter
-# print(GPIO.input(gpio_pin_7))
-
+gpio_my_pin = 4 # give a nive name to the GPIO pin the signal is attached to
+GPIO.setup(gpio_my_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP) # set pin to accept input from radiation counter
+# print(GPIO.input(gpio_my_pin))
+print(GPIO.input(gpio_my_pin))
 while True:
     print('looping')
-    time.sleep(3)
-    print(GPIO.input(gpio_pin_7))
+    time.sleep(1)
+    print(GPIO.input(gpio_my_pin))
 
 
 # GPIO.cleanup()
