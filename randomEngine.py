@@ -18,9 +18,16 @@ GPIO.setup(gpio_my_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # set pin to accept
 # print(GPIO.input(gpio_my_pin))
 
 while True:
-    print('looping')
-    time.sleep(1)
-    print(GPIO.input(gpio_my_pin))
+    # print('looping')
+    # time.sleep(30)
+    # print(GPIO.input(gpio_my_pin))
 
+    current_time = time.strftime("%H:%M:%S", time.localtime())
+
+    file = open('/var/www/html/randomProject/list.html', 'at')
+    file.write(GPIO.input(gpio_my_pin) + ' ' + current_time + '</br>')
+    file.close()
+    
+    time.sleep(30)
 
 # GPIO.cleanup()
