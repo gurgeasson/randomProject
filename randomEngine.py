@@ -22,10 +22,14 @@ while True:
     # time.sleep(30)
     # print(GPIO.input(gpio_my_pin))
 
-    current_time = time.strftime("%H:%M:%S", time.localtime())
+    current_time = time.strftime("%H:%M:%S", time.localtime()) # generate time
 
+    # testing if I can add new entries as a list to my list.html.
+    # at the moment it is only the state of gpio_my_pin, and not a random number.
+    # later it will need to be database... actually just a text file.
+    # also I want the page automaticaly update every time I get a new random number.
     file = open('/var/www/html/randomProject/list.html', 'at')
-    file.write(GPIO.input(gpio_my_pin) + ' ' + current_time + '</br>')
+    file.write(f'{GPIO.input(gpio_my_pin)} {current_time} </br>')
     file.close()
     
     time.sleep(30)
