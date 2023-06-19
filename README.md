@@ -15,6 +15,7 @@ set up git: https://projects.raspberrypi.org/en/projects/getting-started-with-gi
 raspi pinout: https://pinout.xyz/pinout/pin7_gpio4</br>
 raspi gpio: https://www.makeuseof.com/tag/raspberry-pi-gpio-pins-guide/</br>
 https://sourceforge.net/p/raspberry-gpio-python/wiki/browse_pages/</br>
+nginx default www folder: https://serverfault.com/questions/718449/default-directory-for-nginx</br>
 
 ha a geiger counter 5v-ot ad, akkot nem szabad hasznalnom a normal gpio pin-eket
 
