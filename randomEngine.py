@@ -1,18 +1,9 @@
 #! /usr/bin/python
 # print('hello world')
 
-try:
-    import sys #load sys module for sys.exit()
-except RuntimeError:
-    print('Error importing sys!')
-try:
-    import time # load time module for sleep
-except RuntimeError:
-    print('Error importing time!')
-try:
-    import RPi.GPIO as GPIO # load RPi.GPIO module. I need it to have access to the GPIO pins.
-except RuntimeError:
-    print('Error importing RPi.GPIO!')
+import sys #load sys module for sys.exit()
+import time # load time module for sleep
+import RPi.GPIO as GPIO # load RPi.GPIO module. I need it to have access to the GPIO pins.
 
 GPIO.setmode(GPIO.BCM) # I want to address the pins by the BCM number and not by the board number.
 print(GPIO.getmode())
