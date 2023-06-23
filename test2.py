@@ -45,6 +45,8 @@ def random_engine():
 # main
 #
 # i'm not sure if I need any of the following any more, I could just wrap the functions code in a while loop...
-
-while True:
-    random_engine()
+try:
+    while True:
+        random_engine()
+except KeyboardInterrupt:
+    GPIO.cleanup()
