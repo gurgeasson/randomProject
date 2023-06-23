@@ -22,10 +22,16 @@ GPIO.setup(gpio_my_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN) # Input pin, acce
 # I need a function to generate the random numbers
 
 def random_engine():
-    print('random_engine starts, does not much at this point')
-    GPIO.wait_for_edge(gpio_my_pin, GPIO.RISING)
-    print('waiting for edge seem to work')
+    if (time.time() - 5) < reference_hit < time.time():
+        print('random_engine starts, does not much at this point')
+        GPIO.wait_for_edge(gpio_my_pin, GPIO.RISING)
+        print('waiting for edge seem to work')
 
+    else:
+        GPIO.wait_for_edge(gpio_my_pin, GPIO.RISING)
+        reference_hit = time.time()
+        print('set reference_hit')
+        
 # main
 # I need a while loop to get in a loop and run the show. It should limit the frequency a random number is generated: just use sleep.
 # Call random_engine function, than go to sleep --> repeat
