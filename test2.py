@@ -24,18 +24,23 @@ GPIO.setup(gpio_my_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN) # Input pin, acce
 def random_engine():
     global reference_hit
     if (time.time() - 5) < reference_hit < time.time():
-        print('random_engine starts, does not much at this point')
+        # print('random_engine starts, does not much at this point')
         # wait for up to 5 seconds for a rising edge (timeout is in milliseconds)
         GPIO.wait_for_edge(gpio_my_pin, GPIO.RISING, timeout=3000, bouncetime=200)
         random_hit = time.time() # Store the current time stamp
         delta_time = random_hit - reference_hit # Calculate elapsed time from reference_hit to random_hit, and call taht my random number
-        print (f'{delta_time} : {time.strftime("%Y %b %d %H:%M:%S", time.gmtime())}') # prints the random number to the terminal
+        # print (f'{delta_time} : {time.strftime("%Y %b %d %H:%M:%S", time.gmtime())}') # prints the random number to the terminal
+        current_time = time.strftime("%H:%M:%S", time.localtime()) # generate time
+        file = open('/var/www/html/randomProject/list.html', 'at') # open list.html, 'at' - Append and Text mode
+        file.write(f'{delta_time} {current_time} </br>')
+        file.close()
         time.sleep(5)
     else:
         # wait for up to 30 seconds for a rising edge (timeout is in milliseconds)
         GPIO.wait_for_edge(gpio_my_pin, GPIO.RISING, timeout=3000, bouncetime=200)
         reference_hit = time.time()
         print('set reference_hit')
+
 # main
 #
 # i'm not sure if I need any of the following any more
