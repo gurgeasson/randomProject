@@ -1,7 +1,8 @@
 # randomProject
-Random Project is a multi disciplinary project that will generate random numbers. In this repository I'll attempt to give a detailed description and explanation of my journey.
+Random Project is a multidisciplinary project that will eventually come down to generating true random numbers. In this repository, I'll attempt to provide a detailed description and explanation of my journey.
 
-I'll eventually create an organized documentation as I go along
+I'll eventually create organized documentation as I go along.
+
 
 ---
 
@@ -15,8 +16,6 @@ set up git: https://projects.raspberrypi.org/en/projects/getting-started-with-gi
 raspi pinout: https://pinout.xyz/pinout/pin7_gpio4</br>
 raspi gpio: https://www.makeuseof.com/tag/raspberry-pi-gpio-pins-guide/</br>
 https://sourceforge.net/p/raspberry-gpio-python/wiki/browse_pages/</br>
-
-ha a geiger counter 5v-ot ad, akkot nem szabad hasznalnom a normal gpio pin-eket
 
 
 
