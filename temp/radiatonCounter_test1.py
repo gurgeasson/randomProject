@@ -29,7 +29,7 @@ def timer():
     global time_reference
     global count
     current_time = time.time()
-    if (time_reference + 3) <= current_time:
+    if (time_reference + 60) <= current_time:
         time_reference = current_time # 
         print(f'the radiaton count at {current_time} since epoch is {count} CountsPerMinute')
         count = 0 # reset counter
