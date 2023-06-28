@@ -12,6 +12,7 @@ import RPi.GPIO as GPIO # needed to access the GPIO pins
 gpio_my_pin = 12 # the GPIO pin I'm connecting to the counter
 time_reference = time.time()
 count = 0
+own_background = 12 # the j305 geiger tube according to it's datasheet, has a 0,2 PPS own background radiation ==> 12 PPM
 
 # set up GPIO pins
 GPIO.setmode(GPIO.BOARD)
@@ -24,14 +25,16 @@ def hit_callback(channel):
 
 GPIO.add_event_detect(gpio_my_pin, GPIO.RISING, callback=hit_callback)  # add rising edge detection on a channel
 
-# time function --> keeps track of time and triggers every 60 seconds and prints out the radiation CPM
+# time function --> keeps track of time and triggers every 60 seconds and prints out the radiation PPM
 def timer():
     global time_reference
     global count
+    global own_background
     current_time = time.time()
     if (time_reference + 60) <= current_time:
         time_reference = current_time # 
-        print(f'the radiaton count at {current_time} since epoch is {count} CountsPerMinute')
+        adjusted_PPM = count - own_background
+        print(f'the radiaton count at {current_time} since epoch is {adjusted_PPM} PulsePerMinute')
         count = 0 # reset counter
 
 while True:
