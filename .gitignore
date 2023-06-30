@@ -1,5 +1,3 @@
 # .gitignore
 .vscode/*
-mqtt_credentials_MCATGCg1JwIiMyovHTYrEzw.txt
-thingSpeak/credentials.py
 credentials.py
