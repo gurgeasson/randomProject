@@ -38,7 +38,7 @@ topic = "channels/" + credentials.channel_ID + "/publish"
 
 # Run a loop that calculates the system RAM and CPU performance every 20 seconds and publishes the calculated values. Publish to fields 1 and 2 of the specified channel simultaneously using WebSockets.
 
-def publish(adjusted_CPM):
+def thinSpeakWrite(adjusted_CPM):
 
     # build the payload string.
     payload = "field1=" + str(adjusted_CPM) # + "&field2=" + str(example2)

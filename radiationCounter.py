@@ -47,7 +47,7 @@ def timer():
     if (time_reference + 60) <= current_time: # if 900 seconds passed
         time_reference = current_time # update time_reference to currant_time
         calc_CPM() # call function
-        thingSpeakPublish.publish(adjusted_CPM) # from thingSpeakPublish.py
+        thingSpeakPublish.thinSpeakWrite(adjusted_CPM) # from thingSpeakPublish.py
 
 while True:
     timer() # call function
