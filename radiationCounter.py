@@ -34,7 +34,7 @@ def calc_CPM():
     global own_background
     global current_time
     global adjusted_CPM
-    raw_CPM = round(count / 16) # The measurement is over 15 mins, so to calculate CPM I need to dived by the minutes. Also round to nearest whole
+    raw_CPM = round(count / 15) # The measurement is over 15 mins, so to calculate CPM I need to dived by the minutes. Also round to nearest whole
     adjusted_CPM = raw_CPM - own_background # adjust for the tubes own background radiation
     print(f'the radiaton count at {current_time} since epoch is {adjusted_CPM} CountsPerMinute')
     count = 0 # reset counter
@@ -44,7 +44,7 @@ def timer():
     global time_reference
     global current_time
     current_time = time.time()
-    if (time_reference + 60) <= current_time: # if 900 seconds passed
+    if (time_reference + 900) <= current_time: # if 900 seconds passed
         time_reference = current_time # update time_reference to currant_time
         calc_CPM() # call function
         thingSpeakPublish.thinSpeakWrite(adjusted_CPM) # from thingSpeakPublish.py
