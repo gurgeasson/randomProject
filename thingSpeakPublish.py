@@ -45,8 +45,8 @@ def publish(adjusted_CPM):
 
     # attempt to publish this data to the topic.
     try:
-        print ("Writing Payload = ", payload," to host: ", credentials.mqtt_host, " clientID= ", credentials.mqtt_client_ID, " User ", credentials.mqtt_username, " PWD ", credentials.mqtt_password)
-        publish.single(topic, payload, hostname=credentials.mqtt_host, transport=t_transport, port=t_port, client_id=credentials.mqtt_client_ID, auth={'username':credentials.mqtt_username,'password':credentials.mqtt_password})
+        print ("Writing Payload = ", payload," to host: ", mqtt_host, " clientID= ", credentials.mqtt_client_ID, " User ", credentials.mqtt_username, " PWD ", credentials.mqtt_password)
+        publish.single(topic, payload, hostname=mqtt_host, transport=t_transport, port=t_port, client_id=credentials.mqtt_client_ID, auth={'username':credentials.mqtt_username,'password':credentials.mqtt_password})
     except KeyboardInterrupt:
         print('pff...')
     except Exception as e:
