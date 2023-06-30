@@ -7,6 +7,7 @@
 
 import time # needed timestamp
 import RPi.GPIO as GPIO # needed to access the GPIO pins
+import thingSpeakPublish # import thingSpeakPublish
 
 # initialising wariables
 gpio_my_pin = 12 # the GPIO pin I'm connecting to the counter
@@ -46,7 +47,7 @@ def timer():
     if (time_reference + 900) <= current_time: # if 900 seconds passed
         time_reference = current_time # update time_reference to currant_time
         calc_CPM() # call function
-        import thingSpeakPublish # import thingSpeak
+        thingSpeakPublish.publish(adjusted_CPM) # from thingSpeakPublish.py
 
 while True:
     timer() # call function
