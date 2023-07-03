@@ -24,7 +24,7 @@ GPIO.setup(gpio_my_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN) # Input pin, acce
 # checks if the reference_hit time stamp is within 5 seconds, mostly to keep the first generated number value within reason
 def random_engine():
     global reference_hit
-    if (time.time() - 0) < reference_hit < time.time():
+    if (time.time() - 30) < reference_hit < time.time():
         # print('random_engine starts, does not much at this point')
         # wait for up to 30 seconds for a rising edge (timeout is in milliseconds)
         GPIO.wait_for_edge(gpio_my_pin, GPIO.RISING, timeout=3000, bouncetime=200)
