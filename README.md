@@ -7,23 +7,18 @@ It all started in the early 00's, with using the random feature in winamp. I rea
 Also this repository contains the code for the radiation counter project, as the two are closely related. I am considering though to separete the two, as it would make more sense.
 
 ## The equipment
-The hearth of the project is a J305 geiger-muller tube and it's associated circuits. It can detect ionising radiation and send an interrupt an signal when it's detected.</br>
-The brains is a Raspberry Pi model B. It's responsible for running the code generating random numbers (randomEngine.py), and hosting a website to list the generated numbers. Also as the project grew arms and legs, it counts radiation (radiationCounter.py) and reports them to thinSpeak.com.</br>
-The two are connected through a logic level shifter to take care of the 5v <===> 3.3v conversion.
+The hearth of the project is a [J305 geiger-muller tube and it's associated circuits](/documentation/radiationCounter.JPG). It can detect ionising radiation and send an interrupt an signal when it's detected.</br>
+The brains is a [Raspberry Pi model B](/documentation/rasPi1B.JPG). It's responsible for running the code generating random numbers (randomEngine.py), and hosting a website to list the generated numbers. Also as the project grew arms and legs, it counts radiation (radiationCounter.py) and reports them to thinSpeak.com.</br>
+The two are connected through a [logic level shifter](/documentation/logicLevelConverter.JPG) to take care of the 5v <===> 3.3v conversion.
 
 ## Software
 The random numbers are taken care of randomEngine.py</br>
 The radiation is counted by radiationCounter.py
 
-
-
-
-I'll eventually create an organized documentation as I go along
-
 ---
 
-here is my dumping ground:<br>
-quick notes:
+my dumping ground:<br>
+I'll eventually create an organized documentation as I go along
 
 list of resouces:
 raspi security tips: https://raspberrytips.com/security-tips-raspberry-pi/</br>
