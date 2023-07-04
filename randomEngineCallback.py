@@ -28,8 +28,11 @@ GPIO.setup(gpio_my_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN) # Input pin, acce
 # while the timer() runs, a callback function takes care of listening to gpio_my_pin and updating the count variable
 def hit_callback(channel):
     global time_reference
+    global hit_time_reference
+    global dice_roll
     if hit_time_reference != 0:
-        delta_time = time.time() - time_reference # Calculate elapsed time from reference_hit to now, and call that my random number
+        delta_time = time.time() - hit_time_reference # Calculate elapsed time from reference_hit to now, and call that my random number
+        hit_time_reference = time.time()
         conversion_factor = 100 / 6
         dice_roll = math.ceil(((delta_time ** 9) % 1 * 100) / conversion_factor)
         print (f'{dice_roll}, {time.strftime("%Y %b %d %H:%M:%S", time.gmtime())}') # prints the random number to the terminal
