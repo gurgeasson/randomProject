@@ -18,6 +18,7 @@ import RPi.GPIO as GPIO # needed to access the GPIO pins
 ###   Global Variables   ###
 gpio_my_pin = 12 # the GPIO pin I'm connecting to the counter
 time_reference = time.time()
+hit_time_reference = 0
 dice_roll = 0
 
 ###   set up GPIO pins   ###
@@ -27,10 +28,13 @@ GPIO.setup(gpio_my_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN) # Input pin, acce
 # while the timer() runs, a callback function takes care of listening to gpio_my_pin and updating the count variable
 def hit_callback(channel):
     global time_reference
-    delta_time = time_reference - time.time() # Calculate elapsed time from reference_hit to now, and call that my random number
-    conversion_factor = 100 / 6
-    dice_roll = math.ceil(((delta_time ** 9) % 1 * 100) / conversion_factor)
-    print (f'{dice_roll} : {time.strftime("%Y %b %d %H:%M:%S", time.gmtime())}') # prints the random number to the terminal
+    if hit_time_reference != 0:
+        delta_time = time.time() - time_reference # Calculate elapsed time from reference_hit to now, and call that my random number
+        conversion_factor = 100 / 6
+        dice_roll = math.ceil(((delta_time ** 9) % 1 * 100) / conversion_factor)
+        print (f'{dice_roll}, {time.strftime("%Y %b %d %H:%M:%S", time.gmtime())}') # prints the random number to the terminal
+    else:
+        hit_time_reference = time.time()
 
 GPIO.add_event_detect(gpio_my_pin, GPIO.RISING, callback=hit_callback)  # add rising edge detection.
 
@@ -46,6 +50,7 @@ def timer(): # timer() function keeps track of time and triggers some events eve
         global time_reference
         if (time_reference + 60) <= time.time(): # if 60 seconds passed
             write_to_file()
+            time_reference += 60
 
 ###   Main Loop   ###
 while True:
