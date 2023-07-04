@@ -48,17 +48,21 @@ def timer(): # timer() function keeps track of time and triggers some events eve
         except KeyboardInterrupt:
             print('keyboard interrupt while calculating CPM')
             GPIO.cleanup() # clean up GPIO on CTRL+C exit
+            exit()
         except Exception as e:
             print (e)
             GPIO.cleanup() # clean up GPIO on Exception
+            exit()
         try:
             thingSpeakPublish.thinSpeakWrite(adjusted_CPM) # from thingSpeakPublish.py
         except KeyboardInterrupt:
             print('keyboard interrupt while publishing to thigSpeak')
             GPIO.cleanup() # clean up GPIO on CTRL+C exit
+            exit()
         except Exception as e:
             print (e)
             GPIO.cleanup() # clean up GPIO on Exception
+            exit()
 
 ###   Main Loop   ###
 while True:
@@ -67,8 +71,10 @@ while True:
     except KeyboardInterrupt:
         print('keyboard interrupt while running timer()')
         GPIO.cleanup() # clean up GPIO on CTRL+C exit
+        exit()
     except Exception as e:
         print (e)
         GPIO.cleanup() # clean up GPIO on Exception
+        exit()
 
 # GPIO.cleanup() # clean up GPIO on normal exit

@@ -31,7 +31,7 @@ def random_engine():
     global time_reference
     global dice_roll
     # wait for up to 60 seconds for a rising edge (timeout is in milliseconds)
-    if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=60000, bouncetime=30) is None:
+    if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=60000, bouncetime=1) is None:
         print('timeout - 5')
         time_reference += 60
         return
@@ -48,10 +48,10 @@ def timer(): # timer() function keeps track of time and triggers some events eve
         global time_reference
         global dice_roll
         current_time = time.time()
-        if (time_reference + 6) <= current_time: # if 60 seconds passed
+        if (time_reference + 3) <= current_time: # if 60 seconds passed
             # wait for up to 60 seconds for a rising edge (timeout is in milliseconds)
             print ('1')
-            if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=60000, bouncetime=30) is None:
+            if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=60000, bouncetime=1) is None:
                 print('timeout - 2')
                 time_reference += 60
                 return
@@ -63,9 +63,11 @@ def timer(): # timer() function keeps track of time and triggers some events eve
                 except KeyboardInterrupt:
                     print('keyboard interrupt while calculating random number')
                     GPIO.cleanup() # clean up GPIO on CTRL+C exit
+                    exit()
                 except Exception as e:
                     print (e)
                     GPIO.cleanup() # clean up GPIO on Exception
+                    exit()
 
                 human_current_time = time.strftime('%H:%M:%S - %Y/%b/%d', time.localtime()) # generate time
                 file = open('/var/www/html/randomProject/list.html', 'at') # open list.html, 'at' - Append and Text mode
@@ -80,8 +82,10 @@ while True:
     except KeyboardInterrupt:
         print('keyboard interrupt while running timer()')
         GPIO.cleanup() # clean up GPIO on CTRL+C exit
+        exit()
     except Exception as e:
         print (e)
         GPIO.cleanup() # clean up GPIO on Exception
+        exit()
 
 # GPIO.cleanup() # clean up GPIO on normal exit
