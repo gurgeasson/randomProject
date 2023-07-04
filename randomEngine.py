@@ -31,7 +31,7 @@ def random_engine():
         random_hit = time.time() # Store the current time stamp
         delta_time = random_hit - reference_hit # Calculate elapsed time from reference_hit to random_hit, and call taht my random number
         # print (f'{delta_time} : {time.strftime("%Y %b %d %H:%M:%S", time.gmtime())}') # prints the random number to the terminal
-        current_time = time.strftime("%H:%M:%S - %Y/%b/%d", time.localtime()) # generate time
+        current_time = time.strftime('%H:%M:%S - %Y/%b/%d', time.localtime()) # generate time
         file = open('/var/www/html/randomProject/list.html', 'at') # open list.html, 'at' - Append and Text mode
         file.write(f'{delta_time} {current_time} </br>') # append random number and time it was created
         file.close()
