@@ -40,8 +40,8 @@ def random_engine():
         second_hit_time = time.time() # Store the current time stamp
         delta_time = second_hit_time - reference_hit # Calculate elapsed time from reference_hit to random_hit, and call that my random number
         conversion_factor = 100 / 6
-        dice_roll =  math.ceil(((delta_time ** 9) % 1 * 100) / conversion_factor)
-        # print (f'{delta_current_timetime} : {time.strftime("%Y %b %d %H:%M:%S", time.gmtime())}') # prints the random number to the terminal
+        dice_roll = math.ceil(((delta_time ** 9) % 1 * 100) / conversion_factor)
+        print (f'{dice_roll} : {time.strftime("%Y %b %d %H:%M:%S", time.gmtime())}') # prints the random number to the terminal
 
 def timer(): # timer() function keeps track of time and triggers some events every 60 seconds.
         global time_reference

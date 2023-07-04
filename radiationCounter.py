@@ -42,7 +42,7 @@ def timer(): # timer() function keeps track of time and triggers some events eve
     global current_time
     current_time = time.time()
     if (time_reference + 900) <= current_time: # if 900 seconds passed (15 mins)
-        time_reference = current_time # update time_reference to currant_time.
+        time_reference += 900 # update time_reference to currant_time.
         try:
             calc_CPM() # call function
         except KeyboardInterrupt:
