@@ -16,9 +16,8 @@ import math
 import RPi.GPIO as GPIO # needed to access the GPIO pins
 
 ###   Global Variables   ###
-gpio_my_pin = 16 # the GPIO pin I'm connecting to the counter
+gpio_my_pin = 18 # the GPIO pin I'm connecting to the counter
 time_reference = time.time()
-reference_hit = 0
 random_hit = 0
 dice_roll = 0
 
@@ -30,18 +29,17 @@ GPIO.setup(gpio_my_pin, GPIO.IN, pull_up_down = GPIO.PUD_UP) # Input pin, accept
 def random_engine():
     print('4')
     global time_reference
-    global reference_hit
     global dice_roll
-    delta_time
     # wait for up to 60 seconds for a rising edge (timeout is in milliseconds)
-    if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=6000, bouncetime=200) is None:
-        print('5')
+    if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=60000, bouncetime=30) is None:
+        print('timeout - 5')
         time_reference += 60
         return
     else:
         print('6')
         second_hit_time = time.time() # Store the current time stamp
-        delta_time = second_hit_time - reference_hit # Calculate elapsed time from reference_hit to random_hit, and call that my random number
+        delta_time = time_reference - second_hit_time # Calculate elapsed time from reference_hit to random_hit, and call that my random number
+        print(delta_time)
         conversion_factor = 100 / 6
         dice_roll = math.ceil(((delta_time ** 9) % 1 * 100) / conversion_factor)
         print (f'{dice_roll} : {time.strftime("%Y %b %d %H:%M:%S", time.gmtime())}') # prints the random number to the terminal
@@ -50,11 +48,11 @@ def timer(): # timer() function keeps track of time and triggers some events eve
         global time_reference
         global dice_roll
         current_time = time.time()
-        if (time_reference + 60) <= current_time: # if 60 seconds passed
+        if (time_reference + 6) <= current_time: # if 60 seconds passed
             # wait for up to 60 seconds for a rising edge (timeout is in milliseconds)
             print ('1')
-            if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=6000, bouncetime=200) is None:
-                print('2')
+            if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=60000, bouncetime=30) is None:
+                print('timeout - 2')
                 time_reference += 60
                 return
             else:
@@ -68,7 +66,7 @@ def timer(): # timer() function keeps track of time and triggers some events eve
                 except Exception as e:
                     print (e)
                     GPIO.cleanup() # clean up GPIO on Exception
-        
+
                 human_current_time = time.strftime('%H:%M:%S - %Y/%b/%d', time.localtime()) # generate time
                 file = open('/var/www/html/randomProject/list.html', 'at') # open list.html, 'at' - Append and Text mode
                 file.write(f'{dice_roll}, {human_current_time} </br>') # append random number and time it was created
@@ -77,7 +75,6 @@ def timer(): # timer() function keeps track of time and triggers some events eve
 
 ###   Main Loop   ###
 while True:
-    print('0.1')
     try:
         timer() # call function
     except KeyboardInterrupt:
