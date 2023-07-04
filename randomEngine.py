@@ -28,15 +28,18 @@ GPIO.setup(gpio_my_pin, GPIO.IN, pull_up_down = GPIO.PUD_UP) # Input pin, accept
 
 ###   Function Definitions   #### random_engine function --> generating true random numbers
 def random_engine():
+    print('4')
     global time_reference
     global reference_hit
     global dice_roll
     delta_time
     # wait for up to 60 seconds for a rising edge (timeout is in milliseconds)
     if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=6000, bouncetime=200) is None:
+        print('5')
         time_reference += 60
         return
     else:
+        print('6')
         second_hit_time = time.time() # Store the current time stamp
         delta_time = second_hit_time - reference_hit # Calculate elapsed time from reference_hit to random_hit, and call that my random number
         conversion_factor = 100 / 6
@@ -49,11 +52,14 @@ def timer(): # timer() function keeps track of time and triggers some events eve
         current_time = time.time()
         if (time_reference + 60) <= current_time: # if 60 seconds passed
             # wait for up to 60 seconds for a rising edge (timeout is in milliseconds)
+            print ('1')
             if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=6000, bouncetime=200) is None:
+                print('2')
                 time_reference += 60
                 return
             else:
                 time_reference += 60 # update time_reference.
+                print('3')
                 try:
                     random_engine() # call function
                 except KeyboardInterrupt:
