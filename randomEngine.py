@@ -26,7 +26,23 @@ dice_roll = 0
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(gpio_my_pin, GPIO.IN, pull_up_down = GPIO.PUD_UP) # Input pin, accepts pullups from Radiation Counter.
 
-###   Function Definitions   ###
+###   Function Definitions   #### random_engine function --> generating true random numbers
+def random_engine():
+    global time_reference
+    global reference_hit
+    global dice_roll
+    delta_time
+    # wait for up to 60 seconds for a rising edge (timeout is in milliseconds)
+    if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=6000, bouncetime=200) is None:
+        time_reference += 60
+        return
+    else:
+        second_hit_time = time.time() # Store the current time stamp
+        delta_time = second_hit_time - reference_hit # Calculate elapsed time from reference_hit to random_hit, and call that my random number
+        conversion_factor = 100 / 6
+        dice_roll =  math.ceil(((delta_time ** 9) % 1 * 100) / conversion_factor)
+        # print (f'{delta_current_timetime} : {time.strftime("%Y %b %d %H:%M:%S", time.gmtime())}') # prints the random number to the terminal
+
 def timer(): # timer() function keeps track of time and triggers some events every 60 seconds.
         global time_reference
         global dice_roll
@@ -52,24 +68,6 @@ def timer(): # timer() function keeps track of time and triggers some events eve
                 file.write(f'{dice_roll}, {human_current_time} </br>') # append random number and time it was created
                 file.close()
                 # time.sleep(29) # no point cheching time in the next 29 secs.
-
-# random_engine function --> generating true random numbers
-# checks if the reference_hit time stamp is within 5 seconds, mostly to keep the first generated number value within reason
-def random_engine():
-    global time_reference
-    global reference_hit
-    global dice_roll
-    delta_time
-    # wait for up to 60 seconds for a rising edge (timeout is in milliseconds)
-    if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=6000, bouncetime=200) is None:
-        time_reference += 60
-        return
-    else:
-        second_hit_time = time.time() # Store the current time stamp
-        delta_time = second_hit_time - reference_hit # Calculate elapsed time from reference_hit to random_hit, and call that my random number
-        conversion_factor = 100 / 6
-        dice_roll =  math.ceil(((delta_time ** 9) % 1 * 100) / conversion_factor)
-        # print (f'{delta_current_timetime} : {time.strftime("%Y %b %d %H:%M:%S", time.gmtime())}') # prints the random number to the terminal
 
 ###   Main Loop   ###
 while True:
