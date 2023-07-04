@@ -77,6 +77,7 @@ def timer(): # timer() function keeps track of time and triggers some events eve
 
 ###   Main Loop   ###
 while True:
+    print('0.1')
     try:
         timer() # call function
     except KeyboardInterrupt:
