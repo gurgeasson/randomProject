@@ -5,6 +5,7 @@ It all started in the early 00's, with using the random feature in winamp. I rea
 
 #### radiationCounter
 Also this repository contains the code for the radiation counter project, as the two are closely related. I am considering though to separete the two, as it would make more sense.
+To see a chart of the background radiation in my livingroom in Penicuik in the past 12 hours, visit [thingSpeak](https://thingspeak.com/channels/2206987).
 
 ## The equipment
 The hearth of the project is a [J305 geiger-muller tube and it's associated circuits](/documentation/radiationCounter.JPG). It can detect ionising radiation and send an interrupt an signal when it's detected.</br>
