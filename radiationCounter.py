@@ -10,6 +10,10 @@ import time # needed timestamp
 import RPi.GPIO as GPIO # needed to access the GPIO pins
 import thingSpeakPublish # import thingSpeakPublish
 
+# I seem to have problems at startups, probably because my program loads before system time is updated.
+# Not sure, but for good measure, I'll include a long sleep before I initialise time_reference for the first time.
+time.sleep(180) # 3 minutes should be sufficient
+
 ###   Global Variables   ###
 gpio_my_pin = 16 # the GPIO pin I'm connecting to the counter
 time_reference = time.time() # when count starts in time

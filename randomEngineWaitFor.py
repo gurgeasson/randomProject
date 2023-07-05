@@ -9,6 +9,9 @@
 # I convert this to a intiger from 1 to 6 to represent 6 sided dice rolls.
 # I have plans to generate these numbers for a couble of days, and than analise the randomness of the rolls.
 
+# This version operates with the GPIO.wait_for_edge
+# hence the file name
+
 ###   Import Modules and .py Scripts   ###
 import time # needed for sleep and for timestamp
 import math
