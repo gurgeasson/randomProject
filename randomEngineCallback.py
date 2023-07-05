@@ -2,8 +2,7 @@
 
 ###   Description   ###
 # This program interfaces with a radiation counter and generates random numbers from the detected signal.
-# I'm connecting to the INT pin on the radiation conunter. It's normaly HIGH.
-# I'm using BOARD pin 12 on the raspberry pi
+# I'm connecting to the INT2 pin on the radiation conunter. It's normaly LOW.
 # A logic level converter takes care of the 3.3v <--> 5v conversion between counter and pi
 
 # The raw random number (float) is the elapsed time between radiation events in seconds.
@@ -16,7 +15,7 @@ import math
 import RPi.GPIO as GPIO # needed to access the GPIO pins
 
 ###   Global Variables   ###
-gpio_my_pin = 12 # the GPIO pin I'm connecting to the counter
+gpio_my_pin = 18 # the GPIO pin I'm connecting to the counter
 time_reference = time.time()
 hit_time_reference = 0
 dice_roll = 0

@@ -2,8 +2,7 @@
 
 ###   Description   ###
 # This program interfaces with a radiation counter and rounts the hits per minute.
-# I'm connecting to the INT2 pin on the radiation conunter. It's normaly low.
-# I'm using BOARD pin 12 on the raspberry pi
+# I'm connecting to the INT2 pin on the radiation conunter. It's normaly LOW.
 # A logic level converter takes care of the 3.3v <--> 5v conversion between counter and pi
 
 ###   Import Modules and .py Scripts   ###
@@ -12,7 +11,7 @@ import RPi.GPIO as GPIO # needed to access the GPIO pins
 import thingSpeakPublish # import thingSpeakPublish
 
 ###   Global Variables   ###
-gpio_my_pin = 12 # the GPIO pin I'm connecting to the counter
+gpio_my_pin = 16 # the GPIO pin I'm connecting to the counter
 time_reference = time.time() # when count starts in time
 current_time = 0 # initialise current time
 count = 0 # radiation rolling count

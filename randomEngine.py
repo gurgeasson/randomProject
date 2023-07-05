@@ -2,8 +2,7 @@
 
 ###   Description   ###
 # This program interfaces with a radiation counter and generates random numbers from the detected signal.
-# I'm connecting to the INT pin on the radiation conunter. It's normaly HIGH.
-# I'm using BOARD pin 18 on the raspberry pi
+# I'm connecting to the INT pin on the radiation conunter. It's normaly LOW.
 # A logic level converter takes care of the 3.3v <--> 5v conversion between counter and pi
 
 # The raw random number (float) is the elapsed time between radiation events in seconds.
@@ -22,20 +21,17 @@ dice_roll = 0
 
 ###   set up GPIO pins   ###
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(gpio_my_pin, GPIO.IN, pull_up_down = GPIO.PUD_UP) # Input pin, accepts pullups from Radiation Counter.
+GPIO.setup(gpio_my_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN) # Input pin, accepts pullups from Radiation Counter.
 
 ###   Function Definitions   ####
 def random_engine(): # random_engine function --> generating true random numbers
-    print('4')
     global time_reference
     global dice_roll
     # wait for up to 60 seconds for a rising edge (timeout is in milliseconds)
-    if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=60000) is None:
-        print('timeout - 5')
+    if GPIO.wait_for_edge(gpio_my_pin, GPIO.RISING, timeout=60000) is None:
         time_reference += 60
         return
     else:
-        print('6')
         second_hit_time = time.time() # Store the current time stamp
         delta_time = time_reference - second_hit_time # Calculate elapsed time from reference_hit to second_hit_time, and call that my random number
         print(delta_time)
@@ -51,12 +47,10 @@ def timer(): # timer() function keeps track of time and triggers some events eve
             # wait for up to 60 seconds for a rising edge (timeout is in milliseconds)
             print ('1')
             if GPIO.wait_for_edge(gpio_my_pin, GPIO.FALLING, timeout=60000) is None:
-                print('timeout - 2')
                 time_reference += 60
                 return
             else:
                 time_reference += 60 # update time_reference.
-                print('3')
                 try:
                     random_engine() # call function
                 except KeyboardInterrupt:
