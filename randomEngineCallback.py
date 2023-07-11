@@ -35,8 +35,8 @@ def hit_callback(channel):
     if hit_time_reference != 0:
         delta_time = time.time() - hit_time_reference # Calculate elapsed time from reference_hit to now, and call that my random number
         hit_time_reference = time.time()
-        conversion_factor = 100 / 6
-        dice_roll = math.ceil(((delta_time ** 9) % 1 * 100) / conversion_factor)
+        conversion_factor = 100 / 6 # 100/6 will give me numbers from 1 to 6, just like a dice
+        dice_roll = math.ceil(((delta_time * (10 ** 6)) % 1 * 100) / conversion_factor)
         print (f'{dice_roll}, {time.strftime("%Y %b %d %H:%M:%S", time.gmtime())}') # prints the random number to the terminal
     else:
         hit_time_reference = time.time()
